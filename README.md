@@ -1,4 +1,4 @@
-# Nextcloud Calendar 
+# Nextcloud Calendar
 
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/nextcloud/calendar/Build)
 ![Codecov](https://img.shields.io/codecov/c/github/nextcloud/calendar)
