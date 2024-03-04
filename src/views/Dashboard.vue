@@ -165,6 +165,7 @@ export default {
 
 			const {
 				show_tasks: showTasks,
+				show_task_duration: showTaskDuration,
 				timezone,
 			} = loadState('calendar', 'dashboard_data')
 			const locale = await loadMomentLocalization()
@@ -172,6 +173,7 @@ export default {
 			this.$store.commit('loadSettingsFromServer', {
 				timezone,
 				showTasks,
+				showTaskDuration,
 			})
 			this.$store.commit('setMomentLocale', {
 				locale,

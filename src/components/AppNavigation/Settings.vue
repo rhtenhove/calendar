@@ -60,6 +60,12 @@
 				@update:checked="toggleWeekNumberEnabled">
 				{{ $t('calendar', 'Show week numbers') }}
 			</ActionCheckbox>
+			<ActionCheckbox class="settings-fieldset-interior-item"
+				:checked="showTaskDuration"
+				:disabled="savingTaskDuration"
+				@update:checked="toggleTaskDurationEnabled">
+				{{ $t('calendar', 'Show full task duration') }}
+			</ActionCheckbox>
 			<li class="settings-fieldset-interior-item settings-fieldset-interior-item--slotDuration">
 				<label for="slotDuration">{{ $t('calendar', 'Time increments') }}</label>
 				<NcSelect :id="slotDuration"
@@ -221,6 +227,7 @@ export default {
 			eventLimit: state => state.settings.eventLimit,
 			showPopover: state => !state.settings.skipPopover,
 			showTasks: state => state.settings.showTasks,
+			showTaskDuration: state => state.settings.showTaskDuration,
 			showWeekends: state => state.settings.showWeekends,
 			showWeekNumbers: state => state.settings.showWeekNumbers,
 			slotDuration: state => state.settings.slotDuration,
@@ -390,6 +397,21 @@ export default {
 				console.error(error)
 				showError(this.$t('calendar', 'New setting was not saved successfully.'))
 				this.savingWeekNumber = false
+			}
+		},
+		/**
+		 * Toggles the setting for "Show task duration"
+		 */
+		async toggleTaskDurationEnabled() {
+			// change to loading status
+			this.savingTaskDuration = true
+			try {
+				await this.$store.dispatch('toggleTaskDurationEnabled')
+				this.savingTaskDuration = false
+			} catch (error) {
+				console.error(error)
+				showError(this.$t('calendar', 'New setting was not saved successfully.'))
+				this.savingTaskDuration = false
 			}
 		},
 		/**

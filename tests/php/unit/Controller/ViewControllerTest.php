@@ -106,6 +106,7 @@ class ViewControllerTest extends TestCase {
 				['calendar', 'slotDuration', '00:30:00', 'defaultSlotDuration'],
 				['calendar', 'defaultReminder', 'none', 'defaultDefaultReminder'],
 				['calendar', 'showTasks', 'yes', 'defaultShowTasks'],
+				['calendar', 'showTaskDuration', 'yes', 'defaultShowTaskDuration'],
 				['calendar', 'installed_version', '', '1.0.0'],
 				['calendar', 'hideEventExport', 'no', 'yes'],
 				['calendar', 'disableAppointments', 'no', 'no'],
@@ -128,6 +129,7 @@ class ViewControllerTest extends TestCase {
 				['user123', 'calendar', 'slotDuration', 'defaultSlotDuration', '00:15:00'],
 				['user123', 'calendar', 'defaultReminder', 'defaultDefaultReminder', '00:10:00'],
 				['user123', 'calendar', 'showTasks', 'defaultShowTasks', '00:15:00'],
+				['user123', 'calendar', 'showTaskDuration', 'defaultShowTaskDuration', '00:15:00'],
 			]);
 		$this->appManager->expects(self::exactly(3))
 			->method('isEnabledForUser')
@@ -163,6 +165,7 @@ class ViewControllerTest extends TestCase {
 				['slot_duration', '00:15:00'],
 				['default_reminder', '00:10:00'],
 				['show_tasks', false],
+				['show_task_duration', false],
 				['tasks_enabled', true],
 				['hide_event_export', true],
 				['force_event_alarm_type', null],
@@ -201,6 +204,7 @@ class ViewControllerTest extends TestCase {
 				['calendar', 'slotDuration', '00:30:00', 'defaultSlotDuration'],
 				['calendar', 'defaultReminder', 'none', 'defaultDefaultReminder'],
 				['calendar', 'showTasks', 'yes', 'defaultShowTasks'],
+				['calendar', 'showTaskDuration', 'no', 'defaultShowTaskDuration'],
 				['calendar', 'installed_version', '', '1.0.0'],
 				['calendar', 'hideEventExport', 'no', 'yes'],
 				['calendar', 'disableAppointments', 'no', 'no'],
@@ -223,6 +227,7 @@ class ViewControllerTest extends TestCase {
 				['user123', 'calendar', 'slotDuration', 'defaultSlotDuration', '00:15:00'],
 				['user123', 'calendar', 'defaultReminder', 'defaultDefaultReminder', '00:10:00'],
 				['user123', 'calendar', 'showTasks', 'defaultShowTasks', '00:15:00'],
+				['user123', 'calendar', 'showTaskDuration', 'defaultShowTaskDuration', '00:15:00'],
 			]);
 		$this->appManager->expects(self::exactly(3))
 			->method('isEnabledForUser')
@@ -258,6 +263,7 @@ class ViewControllerTest extends TestCase {
 				['slot_duration', '00:15:00'],
 				['default_reminder', '00:10:00'],
 				['show_tasks', false],
+				['show_task_duration', false],
 				['tasks_enabled', false],
 				['hide_event_export', true],
 				['force_event_alarm_type', null],

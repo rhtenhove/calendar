@@ -40,6 +40,7 @@ const state = {
 	// user-defined calendar settings
 	eventLimit: null,
 	showTasks: null,
+	showTaskDuration: null,
 	showWeekends: null,
 	showWeekNumbers: null,
 	skipPopover: null,
@@ -85,6 +86,15 @@ const mutations = {
 	toggleTasksEnabled(state) {
 		state.showTasks = !state.showTasks
 	},
+
+	/**
+	 * Updates the user's setting for visibility of task duration
+	 *
+	 * @param {object} state The Vuex state
+	 */
+		toggleShowTaskDuration(state) {
+			state.showTaskDuration = !state.showTaskDuration
+		},
 
 	/**
 	 * Updates the user's setting for visibility of weekends
@@ -170,6 +180,7 @@ const mutations = {
 	 * @param {boolean} data.firstRun Whether or not this is the first run
 	 * @param {boolean} data.showWeekNumbers Whether or not to show week numbers
 	 * @param {boolean} data.showTasks Whether or not to display tasks with a due-date
+	 * @param {boolean} data.showTaskDuration Whether or not to display task from start to end
 	 * @param {boolean} data.showWeekends Whether or not to display weekends
 	 * @param {boolean} data.skipPopover Whether or not to skip the simple event popover
 	 * @param {string} data.slotDuration The duration of one slot in the agendaView
@@ -185,7 +196,7 @@ const mutations = {
 	 * @param {boolean} data.showResources Show or hide the resources tab
 	 * @param {string} data.publicCalendars
 	 */
-	loadSettingsFromServer(state, { appVersion, eventLimit, firstRun, showWeekNumbers, showTasks, showWeekends, skipPopover, slotDuration, defaultReminder, talkEnabled, tasksEnabled, timezone, hideEventExport, forceEventAlarmType, disableAppointments, canSubscribeLink, attachmentsFolder, showResources, publicCalendars }) {
+	loadSettingsFromServer(state, { appVersion, eventLimit, firstRun, showWeekNumbers, showTasks, showTaskDuration, showWeekends, skipPopover, slotDuration, defaultReminder, talkEnabled, tasksEnabled, timezone, hideEventExport, forceEventAlarmType, disableAppointments, canSubscribeLink, attachmentsFolder, showResources, publicCalendars }) {
 		logInfo(`
 Initial settings:
 	- AppVersion: ${appVersion}
@@ -193,6 +204,7 @@ Initial settings:
 	- FirstRun: ${firstRun}
 	- ShowWeekNumbers: ${showWeekNumbers}
 	- ShowTasks: ${showTasks}
+	- showTaskDuration: ${showTaskDuration}
 	- ShowWeekends: ${showWeekends}
 	- SkipPopover: ${skipPopover}
 	- SlotDuration: ${slotDuration}
@@ -214,6 +226,7 @@ Initial settings:
 		state.firstRun = firstRun
 		state.showWeekNumbers = showWeekNumbers
 		state.showTasks = showTasks
+		state.showTaskDuration = showTaskDuration
 		state.showWeekends = showWeekends
 		state.skipPopover = skipPopover
 		state.slotDuration = slotDuration
@@ -365,6 +378,22 @@ const actions = {
 		commit('clearFetchedTimeRanges')
 		commit('incrementModificationCount')
 	},
+
+		/**
+	 * Updates the user's setting for visibility of task duration
+	 *
+	 * @param {object} vuex The Vuex destructuring object
+	 * @param {object} vuex.state The Vuex state
+	 * @param {Function} vuex.commit The Vuex commit Function
+	 * @return {Promise<void>}
+	 */
+		async toggleTaskDurationEnabled({ state, commit }) {
+			const newState = !state.showTasks
+			const value = newState ? 'yes' : 'no'
+	
+			await setConfig('showTaskDuration', value)
+			commit('toggleTaskDurationEnabled')
+		},
 
 	/**
 	 * Updates the user's setting for visibility of week numbers

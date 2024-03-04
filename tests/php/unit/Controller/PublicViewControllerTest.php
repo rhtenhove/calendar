@@ -77,6 +77,7 @@ class PublicViewControllerTest extends TestCase {
 				['calendar', 'slotDuration', '00:30:00', 'defaultSlotDuration'],
 				['calendar', 'defaultReminder', 'none', 'defaultDefaultReminder'],
 				['calendar', 'showTasks', 'yes', 'yes'],
+				['calendar', 'showTaskDuration', 'yes', 'yes'],
 				['dav', 'allow_calendar_link_subscriptions', 'yes', 'defaultCanSubscribeLink'],
 				['calendar', 'installed_version', '', '1.0.0']
 			]);
@@ -119,6 +120,7 @@ class PublicViewControllerTest extends TestCase {
 				['calendar', 'slot_duration', 'defaultSlotDuration'],
 				['calendar', 'default_reminder', 'defaultDefaultReminder'],
 				['calendar', 'show_tasks', true],
+				['calendar', 'show_task_duration', false],
 				['calendar', 'tasks_enabled', false],
 				['calendar', 'hide_event_export', false],
 				['calendar', 'can_subscribe_link', 'defaultCanSubscribeLink'],
@@ -159,6 +161,7 @@ class PublicViewControllerTest extends TestCase {
 				['calendar', 'slotDuration', '00:30:00', 'defaultSlotDuration'],
 				['calendar', 'defaultReminder', 'none', 'defaultDefaultReminder'],
 				['calendar', 'showTasks', 'yes', 'defaultShowTasks'],
+				['calendar', 'showTaskDuration', 'yes', 'defaultShowTaskDuration'],
 				['dav', 'allow_calendar_link_subscriptions', 'yes', 'defaultCanSubscribeLink'],
 				['calendar', 'installed_version', '', '1.0.0']
 			]);
@@ -200,6 +203,7 @@ class PublicViewControllerTest extends TestCase {
 				['calendar', 'slot_duration', 'defaultSlotDuration'],
 				['calendar', 'default_reminder', 'defaultDefaultReminder'],
 				['calendar', 'show_tasks', false],
+				['calendar', 'show_task_duration', false],
 				['calendar', 'tasks_enabled', false],
 				['calendar', 'hide_event_export', false],
 				['calendar', 'can_subscribe_link', 'defaultCanSubscribeLink'],

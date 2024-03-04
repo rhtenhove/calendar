@@ -64,18 +64,21 @@ class JsDataServiceTest extends TestCase {
 			->method('getAppValue')
 			->willReturnMap([
 				['calendar', 'timezone', 'automatic', 'default-app-value-timezone'],
-				['calendar', 'showTasks', 'yes', 'default-app-value-showTasks']
+				['calendar', 'showTasks', 'yes', 'default-app-value-showTasks'],
+				['calendar', 'showTaskDuration', 'no', 'default-app-value-showTaskDuration']
 			]);
 		$this->config
 			->method('getUserValue')
 			->willReturnMap([
 				['john.doe', 'calendar', 'timezone', 'default-app-value-timezone', 'timezone-config-value'],
-				['john.doe', 'calendar', 'showTasks', 'default-app-value-showTasks', 'yes']
+				['john.doe', 'calendar', 'showTasks', 'default-app-value-showTasks', 'yes'],
+				['john.doe', 'calendar', 'showTaskDuration', 'default-app-value-showTaskDuration', 'yes']
 			]);
 
 		$this->assertEquals([
 			'timezone' => 'timezone-config-value',
 			'show_tasks' => true,
+			'show_task_duration' => false,
 		], $this->service->jsonSerialize());
 	}
 

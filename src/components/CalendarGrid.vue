@@ -98,6 +98,7 @@ export default {
 			showWeekNumbers: state => state.settings.showWeekNumbers,
 			slotDuration: state => state.settings.slotDuration,
 			showTasks: state => state.settings.showTasks,
+			showTaskDuration: state => state.settings.showTaskDuration,
 			timezone: state => state.settings.timezone,
 			modificationCount: state => state.calendarObjects.modificationCount,
 		}),

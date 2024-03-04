@@ -90,6 +90,8 @@ class SettingsController extends Controller {
 				return $this->setDefaultReminder($value);
 			case 'showTasks':
 				return $this->setShowTasks($value);
+			case 'showTaskDuration':
+				return $this->setShowTaskDuration($value);
 			case 'attachmentsFolder':
 				return $this->setAttachmentsFolder($value);
 			default:

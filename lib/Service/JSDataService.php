@@ -60,12 +60,16 @@ class JSDataService implements \JsonSerializable {
 
 		$defaultTimezone = $this->config->getAppValue(Application::APP_ID, 'timezone', 'automatic');
 		$defaultShowTasks = $this->config->getAppValue(Application::APP_ID, 'showTasks', 'yes');
+		$defaultShowTaskDuration = $this->config->getAppValue(Application::APP_ID, 'showTaskDuration', 'yes');
 		$timezone = $this->config->getUserValue($user->getUID(), Application::APP_ID, 'timezone', $defaultTimezone);
 		$showTasks = $this->config->getUserValue($user->getUID(), Application::APP_ID, 'showTasks', $defaultShowTasks) === 'yes';
+		$showTaskDuration = $this->config->getUserValue($user->getUID(), Application::APP_ID, 'showTaskDuration', $defaultShowTaskDuration) === 'no';
 
 		return [
 			'timezone' => $timezone,
 			'show_tasks' => $showTasks,
+			'show_task_duration' => $showTaskDuration,
+
 		];
 	}
 }

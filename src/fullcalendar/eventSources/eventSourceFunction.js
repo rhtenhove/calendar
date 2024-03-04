@@ -28,6 +28,9 @@ import {
 } from '../../utils/color.js'
 import logger from '../../utils/logger.js'
 import { getAllObjectsInTimeRange } from '../../utils/calendarObject.js'
+import { loadState } from '@nextcloud/initial-state'
+
+const showTaskDuration = loadState('calendar', 'show_task_duration')
 
 /**
  * convert an array of calendar-objects to events
@@ -75,7 +78,12 @@ export function eventSourceFunction(calendarObjects, calendar, start, end, timez
 			} else if (object.name === 'VTODO') {
 				// For tasks, we only want to display when it is due,
 				// not for how long it has been in progress already
-				jsStart = object.endDate.getInTimezone(timezone).jsDate
+				if (showTaskDuration === 'on') {
+					jsStart = object.startDate.getInTimezone(timezone).jsDate
+				} else {
+					jsStart = object.endDate.getInTimezone(timezone).jsDate
+				}
+				
 				jsEnd = object.endDate.getInTimezone(timezone).jsDate
 			} else {
 				// We do not want to display anything that's neither

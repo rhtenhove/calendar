@@ -55,6 +55,7 @@ describe('store/settings test suite', () => {
 			talkEnabled: false,
 			eventLimit: null,
 			showTasks: null,
+			showTaskDuration: null,
 			showWeekends: null,
 			showWeekNumbers: null,
 			skipPopover: null,
@@ -132,6 +133,18 @@ describe('store/settings test suite', () => {
 		expect(state.showWeekNumbers).toEqual(false)
 	})
 
+	it('should provide a mutation to toggle the task-duration setting', () => {
+		const state = {
+			showTaskDuration: false,
+		}
+
+		settingsStore.mutations.toggleShowTaskDuration(state)
+		expect(state.showTaskDuration).toEqual(true)
+
+		settingsStore.mutations.toggleShowTaskDuration(state)
+		expect(state.showTaskDuration).toEqual(false)
+	})
+
 	it('should provide a mutation to set the slot duration setting', () => {
 		const state = {
 			slotDuration: 'previousValue',
@@ -166,6 +179,7 @@ describe('store/settings test suite', () => {
 			talkEnabled: false,
 			eventLimit: null,
 			showTasks: null,
+			showTaskDuration: null,
 			showWeekends: null,
 			showWeekNumbers: null,
 			skipPopover: null,
@@ -190,6 +204,7 @@ describe('store/settings test suite', () => {
 			firstRun: true,
 			showWeekNumbers: true,
 			showTasks: false,
+			showTaskDuration: false,
 			showWeekends: true,
 			skipPopover: true,
 			slotDuration: '00:30:00',
@@ -217,6 +232,7 @@ Initial settings:
 	- FirstRun: true
 	- ShowWeekNumbers: true
 	- ShowTasks: false
+	- showTaskDuration: false
 	- ShowWeekends: true
 	- SkipPopover: true
 	- SlotDuration: 00:30:00
@@ -238,6 +254,7 @@ Initial settings:
 			firstRun: true,
 			showWeekNumbers: true,
 			showTasks: false,
+			showTaskDuration: false,
 			showWeekends: true,
 			skipPopover: true,
 			slotDuration: '00:30:00',
@@ -264,6 +281,7 @@ Initial settings:
 			talkEnabled: false,
 			eventLimit: null,
 			showTasks: null,
+			showTaskDuration: null,
 			showWeekends: null,
 			showWeekNumbers: null,
 			skipPopover: null,
@@ -284,6 +302,7 @@ Initial settings:
 			talkEnabled: false,
 			eventLimit: null,
 			showTasks: null,
+			showTaskDuration: null,
 			showWeekends: null,
 			showWeekNumbers: null,
 			skipPopover: null,
@@ -540,6 +559,44 @@ Initial settings:
 		expect(setConfig).toHaveBeenNthCalledWith(1, 'showTasks', 'no')
 		expect(commit).toHaveBeenCalledTimes(3)
 		expect(commit).toHaveBeenNthCalledWith(1, 'toggleTasksEnabled')
+		expect(commit).toHaveBeenNthCalledWith(2, 'clearFetchedTimeRanges')
+		expect(commit).toHaveBeenNthCalledWith(3, 'incrementModificationCount')
+	})
+
+	it('should provide an action to toggle the task-duration setting - false to true', async () => {
+		expect.assertions(6)
+
+		const state = {
+			showTaskDuration: false,
+		}
+		const commit = jest.fn()
+
+		setConfig.mockReturnValueOnce()
+
+		await settingsStore.actions.toggleShowTaskDuration({ state, commit })
+		expect(setConfig).toHaveBeenCalledTimes(1)
+		expect(setConfig).toHaveBeenNthCalledWith(1, 'showTaskDuration', 'yes')
+		expect(commit).toHaveBeenCalledTimes(3)
+		expect(commit).toHaveBeenNthCalledWith(1, 'toggleShowTaskDuration')
+		expect(commit).toHaveBeenNthCalledWith(2, 'clearFetchedTimeRanges')
+		expect(commit).toHaveBeenNthCalledWith(3, 'incrementModificationCount')
+	})
+
+	it('should provide an action to toggle the task-duration setting - true to false', async () => {
+		expect.assertions(6)
+
+		const state = {
+			showTaskDuration: true,
+		}
+		const commit = jest.fn()
+
+		setConfig.mockReturnValueOnce()
+
+		await settingsStore.actions.toggleShowTaskDuration({ state, commit })
+		expect(setConfig).toHaveBeenCalledTimes(1)
+		expect(setConfig).toHaveBeenNthCalledWith(1, 'showTaskDuration', 'no')
+		expect(commit).toHaveBeenCalledTimes(3)
+		expect(commit).toHaveBeenNthCalledWith(1, 'toggleShowTaskDuration')
 		expect(commit).toHaveBeenNthCalledWith(2, 'clearFetchedTimeRanges')
 		expect(commit).toHaveBeenNthCalledWith(3, 'incrementModificationCount')
 	})
